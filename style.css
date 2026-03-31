@@ -1,0 +1,528 @@
+/* ===========================
+   Windows 95 Theme
+   =========================== */
+
+:root {
+  --win-gray: #c0c0c0;
+  --win-dark: #808080;
+  --win-darker: #404040;
+  --win-white: #ffffff;
+  --win-black: #000000;
+  --win-blue: #000080;
+  --win-blue-light: #1084d0;
+  --win-desktop: #008080;
+  --win-font: "MS Sans Serif", "Microsoft Sans Serif", Tahoma, sans-serif;
+
+  /* Bevel helpers */
+  --bevel-raised:
+    inset -1px -1px 0 var(--win-darker),
+    inset 1px 1px 0 var(--win-white),
+    inset -2px -2px 0 var(--win-dark),
+    inset 2px 2px 0 var(--win-gray);
+
+  --bevel-sunken:
+    inset 1px 1px 0 var(--win-darker),
+    inset -1px -1px 0 var(--win-white),
+    inset 2px 2px 0 var(--win-dark),
+    inset -2px -2px 0 var(--win-gray);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--win-font);
+  font-size: 11px;
+  color: var(--win-black);
+  background: var(--win-desktop);
+}
+
+/* ===========================
+   Desktop
+   =========================== */
+
+.desktop {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--win-desktop);
+  overflow: hidden;
+}
+
+.desktop-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  width: 90px;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 4px;
+  user-select: none;
+  width: 80px;
+  text-align: center;
+}
+
+.desktop-icon img {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
+.desktop-icon span {
+  color: var(--win-white);
+  font-size: 11px;
+  text-shadow: 1px 1px 1px var(--win-black);
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+.desktop-icon:hover span,
+.desktop-icon:focus span {
+  background: var(--win-blue);
+  outline: 1px dotted var(--win-white);
+}
+
+/* ===========================
+   Taskbar
+   =========================== */
+
+.taskbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--win-gray);
+  box-shadow: var(--bevel-raised);
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  gap: 4px;
+  z-index: 9999;
+}
+
+.taskbar-divider {
+  width: 2px;
+  height: 30px;
+  box-shadow: inset 1px 0 0 var(--win-dark), inset -1px 0 0 var(--win-white);
+  margin: 0 2px;
+}
+
+.start-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--win-gray);
+  border: none;
+  box-shadow: var(--bevel-raised);
+  padding: 3px 8px 3px 5px;
+  cursor: pointer;
+  font-family: var(--win-font);
+  font-size: 12px;
+  font-weight: bold;
+  height: 32px;
+  min-width: 64px;
+}
+
+.start-btn:active {
+  box-shadow: var(--bevel-sunken);
+  padding: 4px 7px 2px 6px;
+}
+
+.start-icon {
+  width: 20px;
+  height: 20px;
+  image-rendering: pixelated;
+}
+
+.taskbar-clock {
+  margin-left: auto;
+  background: var(--win-gray);
+  box-shadow: var(--bevel-sunken);
+  padding: 3px 8px;
+  font-size: 11px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  min-width: 64px;
+  justify-content: center;
+}
+
+/* ===========================
+   Start Menu
+   =========================== */
+
+/* ===========================
+   Custom Win95 Cursor
+   =========================== */
+
+* { cursor: none !important; }
+
+#win95-cursor {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  width: 20px;
+  height: 24px;
+  transform: translate(0, 0);
+  /* Win95 arrow cursor drawn as an SVG background */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='24' viewBox='0 0 20 24'%3E%3Cpolygon points='2,2 2,20 6,16 9,22 11,21 8,15 14,15' fill='white' stroke='black' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: background-image 0.05s;
+}
+
+#win95-cursor.clicking {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='24' viewBox='0 0 20 24'%3E%3Cpolygon points='2,2 2,20 6,16 9,22 11,21 8,15 14,15' fill='%23c0c0c0' stroke='black' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* ===========================
+   Start Menu
+   =========================== */
+
+.start-menu {
+  display: none;
+  position: fixed;
+  top: 40px;
+  left: 4px;
+  width: 220px;
+  background: var(--win-gray);
+  box-shadow:
+    inset -1px -1px 0 var(--win-darker),
+    inset 1px 1px 0 var(--win-white),
+    2px 2px 4px rgba(0,0,0,0.4);
+  z-index: 99999;
+  flex-direction: row;
+}
+
+.start-menu.open {
+  display: flex;
+}
+
+.start-menu-banner {
+  width: 28px;
+  background: var(--win-blue);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 8px 0;
+  flex-shrink: 0;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  gap: 2px;
+}
+
+.banner-text-win {
+  color: #d4d0c8;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: var(--win-font);
+}
+
+.banner-text-95 {
+  color: var(--win-white);
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  font-family: var(--win-font);
+}
+
+.start-menu-list {
+  list-style: none;
+  flex: 1;
+  padding: 4px 2px;
+}
+
+.start-menu-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.start-menu-list li img {
+  width: 24px;
+  height: 24px;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+.start-menu-list li:hover {
+  background: var(--win-blue);
+  color: var(--win-white);
+}
+
+.start-menu-list li.separator {
+  height: 1px;
+  background: none;
+  box-shadow: 0 0 0 0;
+  border-top: 1px solid var(--win-dark);
+  border-bottom: 1px solid var(--win-white);
+  padding: 0;
+  margin: 4px 0;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ===========================
+   Windows
+   =========================== */
+
+.window {
+  position: absolute;
+  background: var(--win-gray);
+  box-shadow:
+    inset -1px -1px 0 var(--win-darker),
+    inset 1px 1px 0 var(--win-white),
+    inset -2px -2px 0 var(--win-dark),
+    inset 2px 2px 0 var(--win-gray),
+    3px 3px 8px rgba(0,0,0,0.35);
+  min-width: 320px;
+  z-index: 100;
+}
+
+.window-titlebar {
+  background: linear-gradient(to right, var(--win-blue), var(--win-blue-light));
+  padding: 3px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: default;
+  user-select: none;
+  height: 24px;
+}
+
+.titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--win-white);
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.titlebar-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+.titlebar-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.win-btn {
+  width: 18px;
+  height: 16px;
+  background: var(--win-gray);
+  border: none;
+  box-shadow: var(--bevel-raised);
+  font-size: 9px;
+  font-family: var(--win-font);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+
+.win-btn:active {
+  box-shadow: var(--bevel-sunken);
+}
+
+.close-btn {
+  font-size: 10px;
+}
+
+.window-menubar {
+  display: flex;
+  gap: 0;
+  padding: 2px 4px;
+  border-bottom: 1px solid var(--win-dark);
+}
+
+.window-menubar span {
+  padding: 2px 6px;
+  cursor: default;
+  font-size: 11px;
+}
+
+.window-menubar span:hover {
+  background: var(--win-blue);
+  color: var(--win-white);
+}
+
+.window-body {
+  padding: 12px;
+  background: var(--win-gray);
+}
+
+.window-statusbar {
+  border-top: 1px solid var(--win-dark);
+  padding: 3px 8px;
+  font-size: 11px;
+  box-shadow: inset 1px 1px 0 var(--win-dark), inset -1px -1px 0 var(--win-white);
+  margin: 4px;
+}
+
+/* ===========================
+   About Window Content
+   =========================== */
+
+.about-layout {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.about-avatar {
+  flex-shrink: 0;
+  background: var(--win-white);
+  box-shadow: var(--bevel-sunken);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.about-title {
+  font-size: 11px;
+  color: var(--win-darker);
+  margin-bottom: 8px;
+}
+
+.about-text p {
+  font-size: 11px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.win-hr {
+  border: none;
+  border-top: 1px solid var(--win-dark);
+  border-bottom: 1px solid var(--win-white);
+  margin: 8px 0;
+}
+
+.about-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ===========================
+   Buttons
+   =========================== */
+
+.win95-btn {
+  background: var(--win-gray);
+  border: none;
+  box-shadow: var(--bevel-raised);
+  padding: 4px 12px;
+  font-family: var(--win-font);
+  font-size: 11px;
+  cursor: pointer;
+  min-width: 75px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.win95-btn:active {
+  box-shadow: var(--bevel-sunken);
+  padding: 5px 11px 3px 13px;
+}
+
+.win95-btn:focus {
+  outline: 1px dotted var(--win-black);
+  outline-offset: -3px;
+}
+
+/* ===========================
+   Dialog
+   =========================== */
+
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog-window {
+  position: relative !important;
+  width: 380px;
+  min-width: unset;
+}
+
+.dialog-body {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.dialog-body p {
+  margin-bottom: 10px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 11px;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 8px 12px 10px;
+  border-top: 1px solid var(--win-dark);
+}

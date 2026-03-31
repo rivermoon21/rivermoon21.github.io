@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Personal Page</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Custom Win95 Cursor -->
+  <div id="win95-cursor"></div>
+
+  <!-- Start Menu (anchored to top of viewport) -->
+  <div class="start-menu" id="startMenu">
+    <div class="start-menu-banner">
+      <span class="banner-text-win">Windows</span>
+      <span class="banner-text-95">95</span>
+    </div>
+    <ul class="start-menu-list">
+      <li onclick="openWindow('aboutWindow')">
+        <img src="images/about-me.png" alt="" />
+        About Me
+      </li>
+      <li onclick="openLink('https://www.linkedin.com/in/yourprofile')">
+        <img src="images/www.png" alt="" />
+        LinkedIn
+      </li>
+      <li onclick="openLink('https://yourresumelink.com')">
+        <img src="images/resume.png" alt="" />
+        Resume
+      </li>
+      <li class="separator"></li>
+      <li onclick="showShutdown()">
+        <img src="images/shutdown.png" alt="" />
+        Shut Down...
+      </li>
+    </ul>
+  </div>
+
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <button class="start-btn" id="startBtn" onclick="toggleStartMenu()">
+      <img src="images/win95.png" alt="Start" class="start-icon" />
+      <strong>Start</strong>
+    </button>
+    <div class="taskbar-divider"></div>
+    <div class="taskbar-clock" id="clock">12:00 PM</div>
+  </div>
+
+  <!-- Desktop -->
+  <div class="desktop" id="desktop" onclick="closeStartMenu()">
+
+    <!-- Desktop Icons -->
+    <div class="desktop-icons">
+      <div class="desktop-icon" ondblclick="openWindow('aboutWindow')">
+        <img src="images/recycle.png" alt="Trash" />
+        <span>Recycle Bin</span>
+      </div>
+      <div class="desktop-icon" ondblclick="openWindow('aboutWindow')">
+        <img src="images/about-me.png" alt="About Me" />
+        <span>About Me</span>
+      </div>
+      <div class="desktop-icon" ondblclick="openLink('https://www.linkedin.com/in/mrivermoon/')">
+        <img src="images/www.png" alt="LinkedIn" />
+        <span>LinkedIn</span>
+      </div>
+      <div class="desktop-icon" ondblclick="openLink('https://docs.google.com/document/d/15s6LCPXFeKa0scHyRSPAZ1oLVGYVrMW5b3TdLwdeo_A/edit?usp=sharing')">
+        <img src="images/resume.png" alt="Resume" />
+        <span>Resume</span>
+      </div>
+    </div>
+
+    <!-- About Me Window -->
+    <div class="window" id="aboutWindow" style="display:none; top: 80px; left: 120px;">
+      <div class="window-titlebar" onmousedown="startDrag(event, 'aboutWindow')">
+        <div class="titlebar-left">
+          <img src="https://win98icons.alexmeub.com/icons/png/user_information-0.png" alt="" class="titlebar-icon" />
+          <span>About Me</span>
+        </div>
+        <div class="titlebar-buttons">
+          <button class="win-btn" onclick="minimizeWindow('aboutWindow')">_</button>
+          <button class="win-btn" onclick="maximizeWindow('aboutWindow')">□</button>
+          <button class="win-btn close-btn" onclick="closeWindow('aboutWindow')">✕</button>
+        </div>
+      </div>
+      <div class="window-menubar">
+        <span>File</span>
+        <span>Edit</span>
+        <span>View</span>
+        <span>Help</span>
+      </div>
+      <div class="window-body">
+        <div class="about-layout">
+          <div class="about-avatar">
+            <img src="images/avatar.png" alt="Avatar" style="width:64px;height:64px;" />
+          </div>
+          <div class="about-text">
+            <h2 class="about-name">Mauricio Rivera</h2>
+            <p class="about-title">Software Developer &amp; Builder of Things</p>
+            <hr class="win-hr" />
+            <p>
+              Welcome to my personal page! I'm a developer who loves building things for the web. 
+              I have experience in frontend and backend development, and I'm passionate about 
+              clean code, good design, and solving interesting problems.
+            </p>
+            <p>
+              When I'm not coding, you can find me exploring new technologies, contributing 
+              to open source, or enjoying the outdoors.
+            </p>
+            <hr class="win-hr" />
+            <div class="about-links">
+              <button class="win95-btn" onclick="openLink('https://www.linkedin.com/in/mrivermoon/')">
+                <img src="images/www.png" alt="" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;" />
+                LinkedIn
+              </button>
+              <button class="win95-btn" onclick="openLink('https://docs.google.com/document/d/15s6LCPXFeKa0scHyRSPAZ1oLVGYVrMW5b3TdLwdeo_A/edit?usp=sharing')">
+                <img src="images/resume.png" alt="" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;" />
+                Resume
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="window-statusbar">
+        <span>Ready</span>
+      </div>
+    </div>
+
+    <!-- Shutdown Dialog -->
+    <div class="dialog-overlay" id="shutdownOverlay" style="display:none;">
+      <div class="window dialog-window">
+        <div class="window-titlebar">
+          <div class="titlebar-left">
+            <img src="images/shutdown.png" alt="" class="titlebar-icon" />
+            <span>Shut Down Windows</span>
+          </div>
+          <div class="titlebar-buttons">
+            <button class="win-btn close-btn" onclick="hideShutdown()">✕</button>
+          </div>
+        </div>
+        <div class="window-body dialog-body">
+          <img src="images/shutdown.png" alt="" style="width:48px;height:48px;flex-shrink:0;" />
+          <div>
+            <p><strong>Are you sure you want to shut down your computer?</strong></p>
+            <div class="radio-group">
+              <label><input type="radio" name="shutdown" checked /> Shut down</label>
+              <label><input type="radio" name="shutdown" /> Restart</label>
+              <label><input type="radio" name="shutdown" /> Restart in MS-DOS mode</label>
+            </div>
+          </div>
+        </div>
+        <div class="dialog-footer">
+          <button class="win95-btn" onclick="hideShutdown()">OK</button>
+          <button class="win95-btn" onclick="hideShutdown()">Cancel</button>
+          <button class="win95-btn">Help</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end desktop -->
+
+  <script src="script.js"></script>
+</body>
+</html>
